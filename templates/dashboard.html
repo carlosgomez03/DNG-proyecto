@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block contents %}
+<h1>Dashboard</h1>
+<br>
+{% if user %}
+<p>Hola, {{user.username}}</p>
+<br>
+<a href="{{ url_for('auth.logout') }}">Logout</a>
+{% endif %}
+<p>Este es el dashboard principal:</p>
+<br>
+<a href="{{ url_for('orders.home') }}">Órdenes</a>
+<br>
+<a href="{{ url_for('orderDetails.home') }}">Detalles de órdenes</a>
+<br>
+<br>
+{% endblock %}

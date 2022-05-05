@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title %}Órdenes{% endblock %}
+{% block contents %}
+<h1>Órdenes</h1>
+{% if user %}
+<p>Hola, {{user.username}}</p>
+<br>
+<a href="{{ url_for('auth.logout') }}">Logout</a>
+{% endif %}
+<p>Resumen de todas las órdenes: </p>
+<br>
+<a href="{{ url_for('orders.create') }}">Agregar nueva orden</a>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Comprador</th>
+            <th>Vendedor</th>
+            <th>Descuento</th>
+            <th>Impuesto</th>
+            <th>Fecha</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.buyer }}</td>
+            <td>{{ item.provider }}</td>
+            <td>{{ item.discount }}</td>
+            <td>{{ item.tax }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.totalSale }}</td>
+            <td><a href="{{ url_for('orderDetails.homeByOrderId', orderId=item.id) }}">Editar detalles</a></td>
+            <td>
+                {% if item.date == None %}
+                <a href="{{ url_for('orders.finalize', id=item.id) }}">Finalizar</a>
+                {% endif %}
+            </td>
+            <td><a href="{{ url_for('orders.delete', id=item.id) }}">Borrar</a></td>
+            <td><a href="{{ url_for('orderDetails.report', orderId=item.id) }}">Ver reporte</a></td> 
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

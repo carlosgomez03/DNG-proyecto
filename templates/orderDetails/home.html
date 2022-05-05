@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block title %}Detalles de orden{% endblock %}
+{% block contents %}
+<h1>Detalles de orden</h1>
+<br>
+{% if user %}
+<p>Hello, {{user.username}}</p>
+<br>
+<a href="{{ url_for('auth.logout') }}">Logout</a>
+{% endif %}
+<p>Resumen de los detalles de orden: </p>
+<br>
+{% if order %}
+<p>Orden:</p>
+<ul>
+    <li>{{ order.id }}</li>
+    <li>{{ order.buyer }}</li>
+    <li>{{ order.provider }}</li>
+    <li>$ {{ order.totalSale }}</li>
+</ul>
+<br>
+<a href="{{ url_for('orders.home') }}">Todas las órdenes</a>
+<br>
+{% endif %}
+<br>
+<a href="{{ url_for('orderDetails.createByOrderId', orderId=orderId) }}">Agregar detalle a la orden</a>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>IdOrden</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Costo Unitario</th>
+            <th>Costo Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.orderId }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unitCost }}</td>
+            <td>{{ item.totalCost }}</td>
+            <td><a href="{{url_for('orderDetails.updateByOrderId', id=item.id, orderId=item.orderId)}}">actualizar</a></td>
+            <td><a href="{{url_for('orderDetails.delete', id=item.id, orderId=orderId)}}">borrar</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

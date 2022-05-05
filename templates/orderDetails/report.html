@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block title %}Página de reporte{% endblock %}
+{% block contents %}
+<h1>Reporte de orden</h1>
+<br>
+{% if user %}
+<p>Hello, {{user.username}}</p>
+<br>
+<a href="{{ url_for('auth.logout') }}">Logout</a>
+{% endif %}
+<br>
+<p>Este es un reporte al estilo factura de la orden.</p>
+<p>Reporte de la orden seleccionada:</p>
+{% if order %}
+<p>Orden: {{ order.id}}</p>
+<ul>
+    <li>Total: $ {{ order.totalSale }}</li>
+    <li>Descuento: {{ order.discount }} %</li>
+    <li>Impuesto: {{ order.tax }} %</li>
+    <li>Total a pagar: $ {{ total_ajustado }}</li>
+</ul>
+{% endif %}
+<br>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>IdOrden</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Costo Unitario</th>
+            <th>Costo Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.orderId }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unitCost }}</td>
+            <td>{{ item.totalCost }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

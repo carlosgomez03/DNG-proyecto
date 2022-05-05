@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Agregar orden{% endblock %}
+{% block contents %}
+<h1>Agregar orden</h1>
+<br>
+{% if user %}
+<p>Hola, {{user.username}}</p>
+<br>
+<a href="{{ url_for('auth.logout') }}">logout</a>
+{% endif %}
+<p>Por favor complete los campos para crear la orden:</p>
+<br>
+<form action="{{ url_for('orders.create') }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.buyer.label }}
+    {{ form.buyer }}
+    {{ form.provider.label }}
+    {{ form.provider }}
+    {{ form.discount.label }}
+    {{ form.discount }}
+    {{ form.tax.label }}
+    {{ form.tax }}
+    {{ form.submit }}
+</form>
+
+{% endblock %}

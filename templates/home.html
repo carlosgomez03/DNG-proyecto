@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block title %}Login{% endblock %}
+{% block contents %}
+<h1>Login/Registro para usuarios</h1>
+<br>
+<a href="{{ url_for('auth.login') }}">Login</a><br>
+<a href="{{ url_for('auth.register') }}">Registrarse</a>
+{% endblock %}

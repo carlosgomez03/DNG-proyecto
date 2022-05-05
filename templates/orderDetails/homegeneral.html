@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block title %}Detalles de órdenes general{% endblock %}
+{% block contents %}
+<h1>Detalles de órdenes general</h1>
+<br>
+{% if user %}
+<p>Hello, {{user.username}}</p>
+<br>
+<a href="{{ url_for('auth.logout') }}">Logout</a>
+{% endif %}
+<p>Resuen general de todos los detalles de orden</p>
+<br>
+<p>Para añadir, actualizar o borrar un detalle, seleccione una orden aquí: <a href="{{ url_for('orders.home') }}">Órdenes</a></p>
+<br>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>IdOrden</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Costo Unitario</th>
+            <th>Costo Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.orderId }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unitCost }}</td>
+            <td>{{ item.totalCost }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

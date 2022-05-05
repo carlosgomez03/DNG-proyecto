@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Actualizar detalles de orden{% endblock %}
+{% block contents %}
+<h1>Actualizar detalles</h1>
+<br>
+{% if user %}
+<p>Hola, {{user.username}}</p>
+<br>
+<a href="{{ url_for('auth.logout') }}">Logout</a>
+{% endif %}
+<p>Por favor actualice los detalles aquí:</p>
+<br>
+<form action="{{ url_for('orderDetails.updateByOrderId', id=id, orderId=orderId) }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.orderId.label }}
+    {{ form.orderId }}
+    {{ form.description.label }}
+    {{ form.description }}
+    {{ form.quantity.label }}
+    {{ form.quantity }}
+    {{ form.unitCost.label }}
+    {{ form.unitCost }}
+    {{ form.submit }}
+</form>
+
+{% endblock %}
